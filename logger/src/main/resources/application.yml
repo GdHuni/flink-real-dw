@@ -1,0 +1,38 @@
+
+spring:
+  application:
+    name: logger
+  freemarker:
+    settings:
+      classic_compatible: true #处理空值
+      datetime_format: yyy-MM-dd HH:mm
+      number_format: 0.##
+    suffix: .ftl
+    template-loader-path:
+      - classpath:/templates/
+
+  #============== kafka ===================
+  # 指定 kafka 代理地址，可以多个
+  kafka:
+    producer:
+      # 指定消息 key 和消息体的编解码方式
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    bootstrap-servers: 172.16.21.200:9093
+
+server:
+  port: 8081
+  #指定项目访问路径前缀
+  servlet:
+    context-path: /huni
+
+#mybatis的相关配置
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*Mapper.xml
+  #实体类返回路径
+  type-aliases-package: com.example.demo.enity.UserVo
+  configuration:
+    #sql语句输出
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
